@@ -1,0 +1,2 @@
+# hailmary
+NFL pool idea
