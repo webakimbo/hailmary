@@ -13,13 +13,13 @@ ActiveAdmin.register Group do
   #   permitted
   # end
 
-  permit_params :name, :tagline, :avatar, :id_admin_user, :active
+  permit_params :name, :tagline, :avatar, :administrator_user_id, :active
 
   form do |f|
     inputs "User Details" do
       input :name
       input :tagline
-      input :id_admin_user, :as => :select, :collection => f.object.users, :include_blank => false
+      input :administrator_user_id, :as => :select, :collection => f.object.users, :include_blank => false
       input :avatar, :as => :file
       input :active, :as => :boolean
     end

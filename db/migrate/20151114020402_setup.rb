@@ -20,7 +20,7 @@ class Setup < ActiveRecord::Migration
       t.string    :name
       t.string    :tagline
       t.string    :avatar
-      t.integer   :id_admin_user
+      t.integer   :administrator_user_id
       t.boolean   :active
       t.timestamps null: false
     end
@@ -28,21 +28,27 @@ class Setup < ActiveRecord::Migration
     create_table :seasons do |t|
       t.integer   :year
       t.boolean   :current
-      t.decimal   :buyin, precision: 2
     end
 
     create_table :weeks do |t|
       t.string    :week
-      t.integer   :id_season
+      t.integer   :season_id
       t.datetime  :deadline
     end
 
+    create_table :competitions do |t|
+      t.integer   :group_id
+      t.integer   :season_id
+      t.decimal   :buyin, precision: 2
+    end
+
     create_table :picks do |t|
-      t.integer   :id_user
-      t.integer   :id_week
-      t.integer   :id_team
-      t.integer   :id_opponent
-      t.integer   :id_favorite
+      t.integer   :user_id
+      t.integer   :week_id
+      t.integer   :competition_id
+      t.integer   :team_id
+      t.integer   :opponent_id
+      t.integer   :favorite_id
       t.string    :odds
       t.integer   :point_value
       t.boolean   :pick_correct
@@ -58,18 +64,16 @@ class Setup < ActiveRecord::Migration
       t.boolean   :active
     end
 
-    create_table :users_groups do |t|
-      t.integer   :id_user
-      t.integer   :id_group
-      t.timestamps null: false
+    create_table :groups_users, id: false do |t|
+      t.integer   :user_id, index: true
+      t.integer   :group_id, index: true
     end
 
-    create_table :users_seasons do |t|
-      t.integer   :id_user
-      t.integer   :id_season
+    create_table :competitions_users, id: false do |t|
+      t.integer   :user_id, index: true
+      t.integer   :competition_id, index: true
       t.boolean   :paid
       t.boolean   :active
-      t.timestamps null: false
     end
     
   end

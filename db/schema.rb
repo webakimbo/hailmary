@@ -46,26 +46,51 @@ ActiveRecord::Schema.define(version: 20151116060356) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
+  create_table "competitions", force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "season_id"
+    t.decimal "buyin",     precision: 2
+  end
+
+  create_table "competitions_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "competition_id"
+    t.boolean "paid"
+    t.boolean "active"
+  end
+
+  add_index "competitions_users", ["competition_id"], name: "index_competitions_users_on_competition_id"
+  add_index "competitions_users", ["user_id"], name: "index_competitions_users_on_user_id"
+
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.string   "tagline"
     t.string   "avatar"
-    t.integer  "id_admin_user"
+    t.integer  "administrator_user_id"
     t.boolean  "active"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
   end
 
+  create_table "groups_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+  end
+
+  add_index "groups_users", ["group_id"], name: "index_groups_users_on_group_id"
+  add_index "groups_users", ["user_id"], name: "index_groups_users_on_user_id"
+
   create_table "picks", force: :cascade do |t|
-    t.integer  "id_user"
-    t.integer  "id_week"
-    t.integer  "id_team"
-    t.integer  "id_opponent"
-    t.integer  "id_favorite"
+    t.integer  "user_id"
+    t.integer  "week_id"
+    t.integer  "competition_id"
+    t.integer  "team_id"
+    t.integer  "opponent_id"
+    t.integer  "favorite_id"
     t.string   "odds"
     t.integer  "point_value"
     t.boolean  "pick_correct"
@@ -77,7 +102,6 @@ ActiveRecord::Schema.define(version: 20151116060356) do
   create_table "seasons", force: :cascade do |t|
     t.integer "year"
     t.boolean "current"
-    t.decimal "buyin",   precision: 2
   end
 
   create_table "teams", force: :cascade do |t|
@@ -112,25 +136,9 @@ ActiveRecord::Schema.define(version: 20151116060356) do
     t.datetime "avatar_updated_at"
   end
 
-  create_table "users_groups", force: :cascade do |t|
-    t.integer  "id_user"
-    t.integer  "id_group"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "users_seasons", force: :cascade do |t|
-    t.integer  "id_user"
-    t.integer  "id_season"
-    t.boolean  "paid"
-    t.boolean  "active"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "weeks", force: :cascade do |t|
     t.string   "week"
-    t.integer  "id_season"
+    t.integer  "season_id"
     t.datetime "deadline"
   end
 

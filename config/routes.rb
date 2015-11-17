@@ -58,6 +58,9 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   
+  get '/competitions/:id/pick', to: 'competitions#pick'
+  resources :competitions, only: [:show]
+
   root 'dashboard#index'
 
 end

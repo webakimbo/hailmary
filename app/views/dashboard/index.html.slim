@@ -1,0 +1,12 @@
+h2 = @user.display_name
+p = @user.location
+p = "Joined #{@user.created_at}"
+
+hr
+
+section
+  h3 This season
+  - @competitions.each do |competition|
+    h4 = link_to competition.group.name, competition_path(competition.id)
+    p = "#{competition.points_awarded(@user.id)} points"
+    p = "Record: #{competition.record(@user.id)}"
