@@ -12,7 +12,7 @@ p = "Joined #{@user.created_at}"
       p = "Record: #{competition.record(@user.id)}"
       - unless competition.next_deadline.nil?
         p
-          = "Pick deadline: #{competition.season.next_deadline}"
+          = "Pick deadline: #{competition.next_deadline}"
           br
           = link_to "Pick", "#{competition_path(competition.id)}/pick"
 

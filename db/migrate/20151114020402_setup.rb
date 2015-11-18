@@ -31,15 +31,16 @@ class Setup < ActiveRecord::Migration
     end
 
     create_table :weeks do |t|
-      t.string    :week
+      t.string    :name
       t.integer   :season_id
       t.datetime  :deadline
+      t.datetime  :ends
     end
 
     create_table :competitions do |t|
       t.integer   :group_id
       t.integer   :season_id
-      t.decimal   :buyin, precision: 2
+      t.decimal   :buyin, precision: 2, default: 0.00
     end
 
     create_table :picks do |t|
@@ -64,17 +65,17 @@ class Setup < ActiveRecord::Migration
       t.boolean   :active
     end
 
-    create_table :groups_users, id: false do |t|
-      t.integer   :user_id, index: true
-      t.integer   :group_id, index: true
-    end
+    # create_table :groups_users, id: false do |t|
+    #   t.integer   :user_id, index: true
+    #   t.integer   :group_id, index: true
+    # end
 
-    create_table :competitions_users, id: false do |t|
-      t.integer   :user_id, index: true
-      t.integer   :competition_id, index: true
-      t.boolean   :paid
-      t.boolean   :active
-    end
+    # create_table :competitions_users, id: false do |t|
+    #   t.integer   :user_id, index: true
+    #   t.integer   :competition_id, index: true
+    #   t.boolean   :paid
+    #   t.boolean   :active
+    # end
     
   end
 end

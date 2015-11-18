@@ -73,18 +73,22 @@ Season.create!(
 )
 
 # Weeks
-week1_deadline = Time.utc(2015, 9, 11, 1, 25, 0)
-deadline = week1_deadline.to_s.to_datetime.strftime('%Q').to_i
+week1_deadline  = Time.utc(2015, 9, 11, 1, 25, 0) # Thurs, 8:25pm EST
+deadline        = week1_deadline.to_s.to_datetime.strftime('%Q').to_i
+week1_ends      = Time.utc(2015, 9, 15, 11, 0, 0) # Tues, 6:00am EST
+ends            = week1_ends.to_s.to_datetime.strftime('%Q').to_i
 17.times do |i|
   dl = deadline + (1000 * 60 * 60 * 24 * 7 * i)
+  e  = ends + (1000 * 60 * 60 * 24 * 7 * i)
   Week.create!(
-    week: "Week #{i+1}", season_id: 1, deadline: Time.at(dl/1000)
+    name: "Week #{i+1}", season_id: 1, deadline: Time.at(dl/1000), ends: Time.at(e/1000)
   )
 end
 
 # Competitions
 Competition.create!(
-  group_id: 1, season_id: 1, buyin: 10.00, users: User.all
+  # group_id: 1, season_id: 1, buyin: 10.00, users: User.all
+  group_id: 1, season_id: 1, buyin: 10.00
 )
 
 # Create an unattached user
@@ -97,16 +101,6 @@ User.create!(
 # Picks
 2.times do |j|
   8.times do |i|
-    # t.integer   :user_id
-    # t.integer   :week_id
-    # t.integer   :team_id
-    # t.integer   :opponent_id
-    # t.integer   :favorite_id
-    # t.string    :odds
-    # t.integer   :point_value
-    # t.boolean   :pick_correct
-    # t.integer   :points_awarded
-
     tms       = teams.clone
     pick      = tms.delete_at(rand(tms.count))
     opponent  = tms.delete_at(rand(tms.count))

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116060356) do
+ActiveRecord::Schema.define(version: 20151117221350) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -52,16 +52,6 @@ ActiveRecord::Schema.define(version: 20151116060356) do
     t.decimal "buyin",     precision: 2
   end
 
-  create_table "competitions_users", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "competition_id"
-    t.boolean "paid"
-    t.boolean "active"
-  end
-
-  add_index "competitions_users", ["competition_id"], name: "index_competitions_users_on_competition_id"
-  add_index "competitions_users", ["user_id"], name: "index_competitions_users_on_user_id"
-
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.string   "tagline"
@@ -77,12 +67,9 @@ ActiveRecord::Schema.define(version: 20151116060356) do
   end
 
   create_table "groups_users", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "group_id"
+    t.integer "group_id", null: false
+    t.integer "user_id",  null: false
   end
-
-  add_index "groups_users", ["group_id"], name: "index_groups_users_on_group_id"
-  add_index "groups_users", ["user_id"], name: "index_groups_users_on_user_id"
 
   create_table "picks", force: :cascade do |t|
     t.integer  "user_id"
@@ -137,9 +124,10 @@ ActiveRecord::Schema.define(version: 20151116060356) do
   end
 
   create_table "weeks", force: :cascade do |t|
-    t.string   "week"
+    t.string   "name"
     t.integer  "season_id"
     t.datetime "deadline"
+    t.datetime "ends"
   end
 
 end
