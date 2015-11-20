@@ -2,6 +2,7 @@ module OddsApi
 
   # http://jsonodds.com/documentation#sports
   class JsonOdds
+    include Singleton
     require 'rest-client'
 
     def source
@@ -25,12 +26,18 @@ module OddsApi
     # end
 
     def odds
-      begin
-        RestClient.get "#{base_uri}/api/odds/nfl", headers
-      rescue RestClient::ExceptionWithResponse => err
-        # prob should return out of here
-        err.response
-      end
+      results = Cachy.cache(:odds, :expires_in => 1.hour) {
+        begin
+          RestClient.get "#{base_uri}/api/odds/nfl", headers
+        rescue RestClient::ExceptionWithResponse => err
+          # prob should return out of here
+          nil
+        end
+      }
+
+      results ||= @last_odds
+      @last_odds = results
+      results
     end
 
     private
