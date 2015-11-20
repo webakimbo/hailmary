@@ -1,0 +1,223 @@
+/**
+ * File:          application.scss
+ *
+ * Description:   Main stylesheet for Hail Mary application.
+ *
+ * Author:        Andy dePasquale
+ * Created:       November 2015
+ */
+
+/*
+ * -----------------
+ * TABLE OF CONTENTS
+ * -----------------
+ * Setup
+ * Utility styles
+ * Common elements
+ * Bootstrap overrides
+ * Application-specific styles
+ * Responsiveness
+ */
+
+/*
+ *  Some styles coming from gems or other sources:
+ */
+
+// /////////////////////////////////////
+//  Setup
+// /////////////////////////////////////
+
+// Function & variable imports
+@import "_functions";
+@import "_variables";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+// /////////////////////////////////////
+//  Utility styles
+// /////////////////////////////////////
+
+// /* The Magnificent Clearfix: Updated to prevent margin-collapsing on child elements.
+//    j.mp/bestclearfix */
+// .clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
+// .clearfix:after { clear: both; }
+// /* Fix clearfix: blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
+// .clearfix { zoom: 1; }
+
+.hide {
+  display: none !important;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.hidetext {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// .center {
+//   @include vertical-align;
+//   margin: 0 auto;
+//   text-align: center;
+// }
+
+.no-break {
+  white-space: nowrap;
+}
+
+
+// /////////////////////////////////////
+//  Common elements
+// /////////////////////////////////////
+
+// html elements
+html, body {
+  // color: $black;
+  // font: {
+  //   size: $base-font-size; // 16px natural
+  //   family: $body;
+  // }
+  height: 100%;
+}
+
+// a {
+//   color: $lt-blue;
+//   text-decoration: none;
+
+//   &:hover,
+//   &:active,
+//   &:focus {
+//     color: $dk-blue;
+//     text-decoration: none;
+//   }
+// }
+
+// h1, h2, h3, h4, h5, h6 {
+//   color: $dk-blue;
+//   font: {
+//     family: $headline;
+//     weight: 300;
+//   }
+//   text-transform: uppercase;
+//   margin: 0;
+// }
+
+// h1 {
+//   font-size: rem-calc(32);
+//   line-height: 1;
+// }
+
+// h3 {
+//   font-size: rem-calc(24);
+//   text-transform: none;
+//   margin-bottom: rem-calc(24);
+// }
+
+// h6 {
+//   font: {
+//     size: rem-calc(12);
+//     family: $headline-light;
+//   }
+//   margin-bottom: rem-calc(8);
+// }
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+table {
+  width: 100%;
+}
+
+
+// /////////////////////////////////////
+//  Application-specific styles
+// /////////////////////////////////////
+
+html {
+  body {
+
+    .won {
+      color: green;
+    }
+
+    .lost {
+      color: red;
+    }
+
+    table {
+      tr {
+        th {
+          td {
+            padding: 6px;
+
+            &.home {
+              text-align: right;
+            }
+          }
+        } // th
+
+        td {
+          a.team {
+            text-decoration: none;
+            padding: 6px;
+            display: block;
+
+            &:hover,
+            &:active {
+              background-color: #def;
+            }
+          }
+
+          &.away {
+            img.logo {
+              float: left;
+              margin-right: 6px;
+            }
+          }
+
+          &.home {
+            text-align: right;
+
+            img.logo {
+              float: right;
+              margin-left: 6px;
+            }
+          }
+        } // td
+      } // tr
+
+      tbody {
+        tr:nth-child(odd) {
+          background-color: #f0f0f0;
+        }
+
+        &.matchups {
+          .point-values {
+            text-align: center;
+
+            .won {
+              font-size: rem-calc(24);
+              display: block;
+            }
+
+            .lost {
+              font-size: rem-calc(18);
+              display: block;
+            }
+          }
+        }
+      } // tbody
+    } // table
+
+  }
+}
+
+
+

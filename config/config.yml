@@ -1,0 +1,13 @@
+development: &default_settings
+  host: localhost:3000
+  url: http://localhost:3000
+  jsonodds_api_key: 05b755fd-aab0-4bc7-ba76-bab9402a5359
+
+test:
+  <<: *default_settings
+
+staging:
+  <<: *default_settings
+
+production:
+  <<: *default_settings

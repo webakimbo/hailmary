@@ -1,26 +1,44 @@
-h2 = @user.display_name
-p = @user.location
-p = "Joined #{@user.created_at}"
+h2 = link_to @competition.group.name, competition_path(@competition)
+p = "Pot total: #{number_to_currency(@pot_total)}"
+- unless @competition.season.current_week.nil?
+  p
+    = @competition.season.current_week
+    - unless @competition.season.pick_window_closed?
+      br
+      = "Pick deadline: #{@competition.season.next_deadline}"
 
-- unless @competitions.to_a.empty?
-  hr
-  section
-    h3 This season
-    - @competitions.each do |competition|
-      h4 = link_to competition.group.name, competition_path(competition.id)
-      p = "#{competition.points_awarded(@user.id)} points (#{competition.place(@user.id)})"
-      p = "Record: #{competition.record(@user.id)}"
-      - unless competition.next_deadline.nil?
-        p
-          = "Pick deadline: #{competition.next_deadline}"
-          br
-          = link_to "Pick", "#{competition_path(competition.id)}/pick"
+hr
 
-- unless @past_competitions.to_a.empty?
-  hr
-  section
-    h3 Past seasons
-    - @past_competitions.each do |competition|
-      h4 = link_to competition.group.name, competition_path(competition.id)
-      p = "#{competition.points_awarded(@user.id)} points (#{competition.place(@user.id)})"
-      p = "Record: #{competition.record(@user.id)}"
+section
+  h3 Make your pick
+  p
+    | Point values in green represent points earned if your pick wins; values in red, points lost if your pick loses. Higher win values correspond to 
+    = link_to "lower win probability", @data.source[:url], { target: "_blank", title: @data.source[:name] }
+    | .
+
+  br
+  table
+    thead
+      tr
+        th.away Away
+        th.text-center(colspan="2") Pick Value
+        th.text-right Home
+    tbody.matchups
+      - @odds.each do |matchup|
+        - ml_away = moneyline2pts matchup['Odds'].first['MoneyLineAway']
+        - ml_home = moneyline2pts matchup['Odds'].first['MoneyLineHome']
+        tr
+          td.away
+            a.team.clearfix(href="#")
+              = get_logo_from_team_name(matchup['AwayTeam'])
+              = matchup['AwayTeam']
+          td.point-values
+            .won = "+#{ml_away}"
+            .lost = -ml_home
+          td.point-values
+            .won = "+#{ml_home}"
+            .lost = -ml_away
+          td.home
+            a.team.clearfix(href="#")
+              = get_logo_from_team_name(matchup['HomeTeam'])
+              = matchup['HomeTeam']

@@ -17,6 +17,11 @@ gem 'coffee-rails', '~> 4.1.0'
 # Use Slim templating language
 gem 'slim'
 
+gem 'bootstrap-sass'
+gem 'inline_svg'
+gem 'cachy'
+
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -55,3 +60,6 @@ gem 'pundit'
 
 # For file uploads
 gem "paperclip", "~> 4.3"
+
+# For odds APIs
+gem 'rest-client', '~> 1.8'

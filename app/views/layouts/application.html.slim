@@ -1,0 +1,39 @@
+doctype 5
+html
+  head
+    / meta
+    = render partial: "partials/meta"
+
+    / Place favicon.ico and apple-touch-icon.png in the root directory
+    link rel="shortcut icon" href="/favicon.ico"
+
+    / stylesheets
+    = stylesheet_link_tag "application", media: "all"
+
+    / javascripts
+    = javascript_include_tag "modernizr/modernizr"
+    = javascript_include_tag "application"
+    = javascript_include_tag params[:controller]
+
+    / other assorted meta content for head
+    = yield :head
+
+    = csrf_meta_tag
+
+  body id=(controller.controller_name) class=(controller.action_name)
+    / = render partial: "partials/nav"
+
+    / - if content_for?(:masthead)
+    /   .masthead class="#{'masthead-tall' if params[:controller].eql?('home')}"
+    /     = yield(:masthead)
+
+    main.container
+      - flash.each do |name, msg|
+        .row 
+          .col-xs-12.col-sm-6
+            .alert class=alert_class(name)
+              / button.close type="button" data-dismiss="alert" aria-hidden="true" &times;
+              = raw(msg)
+      = yield
+
+    / = render partial: "partials/footer"

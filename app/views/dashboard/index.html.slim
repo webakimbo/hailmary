@@ -1,6 +1,6 @@
 h2 = @user.display_name
 p = @user.location
-p = "Joined #{@user.created_at}"
+p = "Joined #{@user.created_at.strftime("%B %Y")}"
 
 - unless @competitions.to_a.empty?
   hr
@@ -10,7 +10,7 @@ p = "Joined #{@user.created_at}"
       h4 = link_to competition.group.name, competition_path(competition.id)
       p = "#{competition.points_awarded(@user.id)} points (#{competition.place(@user.id)})"
       p = "Record: #{competition.record(@user.id)}"
-      - unless competition.next_deadline.nil?
+      - unless competition.season.pick_window_closed?
         p
           = "Pick deadline: #{competition.season.next_deadline}"
           br

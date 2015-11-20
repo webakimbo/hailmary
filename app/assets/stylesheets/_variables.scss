@@ -1,0 +1,247 @@
+/**
+ * File:          _variables.scss
+ * 
+ * Description:   Configurable style values for ChefsFeed application.
+ * 
+ * Author:        ChefsFeed / Code Refactory
+ * Created:       April 2015
+ */
+
+
+// Colors
+$dk-blue:           #2e3253;
+$dk-blue2:          #242e6a;
+$yellow:            #ffff00;
+$lt-blue:           #00aeef;
+$red:               #eb112a;
+$green:             #45cc8b;
+$x-lt-blue:         #b2ebff;
+$x-lt-yellow:       #ffff66;
+$body-link:         #0096cc;
+
+// Grayscale
+$white:             #ffffff;
+$lt-gray:           #eceae8;
+$med-lt-gray:       #b8b8b8;
+$med-gray:          #848484;
+$med-dk-gray:       #4d4d4d;
+$black:             #1c1b20;
+
+// Variations
+
+// Other
+$base-font-size:    100%;  // 16px, a la Foundation
+$base-line-height:  150%;  // 24px, a la Foundation
+
+// Type
+// @import "_fonts";
+$body:              "Times New Roman", Times, serif;
+$headline:          "YWFTUltramagnetic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$headline-light:    "YWFTUltramagnetic-Light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$headline-bold:     "YWFTUltramagnetic-Bold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// Breakpoint overrides
+$screen-lg-min: 1280px;
+
+// Grid values
+
+$grid-width-xs: auto;
+$grid-margin-xs: 10px;
+$grid-gutter-xs: 6px;
+
+$grid-width-sm: 768px;
+$grid-margin-sm: 16px;
+$grid-gutter-sm: 10px;
+
+$grid-width-md: 992px;
+$grid-margin-md: 30px;
+$grid-gutter-md: 12px;
+
+$grid-width-lg: 1280px;
+$grid-margin-lg: 45px;
+$grid-gutter-lg: 17px;
+
+$header-height: 60px;
+
+// Mixins
+
+@mixin hide-text {
+  font: 0/0 serif;
+  text-shadow: none;
+  color: transparent;
+}
+
+@mixin linear-gradient($angle, $color-stops...) {
+  $_angle-with-vendor-prefix: "";
+  $_angle: "";
+  @if $angle == "to top" or $angle == "bottom" {
+    $_angle-with-vendor-prefix: bottom;
+    $_angle: to top;
+  } @else if $angle == "to right" or $angle == "left" {
+    $_angle-with-vendor-prefix: left;
+    $_angle: to right;
+  } @else if $angle == "to bottom" or $angle == "top" {
+    $_angle-with-vendor-prefix: top;
+    $_angle: to bottom;
+  } @else if $angle == "to left" or $angle == "right" {
+    $_angle-with-vendor-prefix: right;
+    $_angle: to left;
+  } @else if $angle == "to top right" or $angle == "bottom left" {
+    $_angle-with-vendor-prefix: bottom left;
+    $_angle: to top right;
+  } @else if $angle == "to bottom right" or $angle == "top left" {
+    $_angle-with-vendor-prefix: top left;
+    $_angle: to bottom right;
+  } @else if $angle == "to bottom left" or $angle == "top right" {
+    $_angle-with-vendor-prefix: top right;
+    $_angle: to bottom left;
+  } @else if $angle == "to top left" or $angle == "bottom right" {
+    $_angle-with-vendor-prefix: bottom right;
+    $_angle: to top left;
+  } @else {
+    $_angle-with-vendor-prefix: $angle % 360;
+    $_angle: (90 - $angle) % 360;
+  }
+  background-image: -webkit-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+  background-image: -moz-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+  background-image: -o-linear-gradient($_angle-with-vendor-prefix, $color-stops);
+  background-image: linear-gradient($_angle, $color-stops);
+}
+
+@mixin border-radius($def) {
+  -webkit-border-radius:  $def;
+  -moz-border-radius:     $def;
+  border-radius:          $def;
+}
+
+@mixin box-shadow($def...) {
+  -moz-box-shadow: $def;
+  -webkit-box-shadow: $def;
+  box-shadow: $def;
+}
+
+// https://css-tricks.com/multi-line-padded-text/
+@mixin padded-multiline-inline($color, $left_pad: 10px, $right_pad: $left_pad, $top_pad: null, $bottom_pad: $top_pad) {
+  @include box-shadow($right_pad 0 0 $color, -$left_pad 0 0 $color);
+  box-decoration-break: clone;
+  @if ($top_pad) {
+    padding-top: $top_pad;
+  }
+  @if ($top_pad) {
+    padding-bottom: $bottom_pad;
+  }
+}
+
+@mixin grayscale-filter($def) {
+  -webkit-filter: grayscale($def);
+  -moz-filter:    grayscale($def);
+  filter:         grayscale($def);
+}
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@mixin transform($val) {
+  -webkit-transform: $val;
+  -moz-transform: $val;
+  -ms-transform: $val;
+  transform: $val;
+}
+
+@mixin placeholder-color($color) {
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+  &:-moz-placeholder { /* Firefox 18- */
+    color: $color;  
+  }
+  &::-moz-placeholder {  /* Firefox 19+ */
+    color: $color;  
+  }
+  &:-ms-input-placeholder {  
+    color: $color;  
+  }
+}
+
+@mixin transition($transition-property, $transition-time, $method) {
+  -webkit-transition: $transition-property $transition-time $method;
+  -moz-transition: $transition-property $transition-time $method;
+  -ms-transition: $transition-property $transition-time $method;
+  -o-transition: $transition-property $transition-time $method;
+  transition: $transition-property $transition-time $method;
+}
+
+@mixin image-zoom {
+  overflow: hidden;
+
+  & > img {
+    // use translateZ and backface visiblity rules to prevent end-of-transition jog
+    // http://stackoverflow.com/a/15472358
+    -webkit-backface-visibility: hidden;
+    @include transform((translateZ(0) scale(1.0, 1.0)));
+    @include transition(transform, 0.6s, ease-out);
+  }
+
+  &:hover > img {
+    @include transform((translateZ(0) scale(1.03, 1.03)));
+  }
+}
+
+// css scrollbar styling:
+// http://cssdeck.com/labs/css3-webkit-vertical-scrollbars/
+// http://stackoverflow.com/questions/9251354/css-customized-scroll-bar-in-div/14150577#14150577
+@mixin scrollbar {
+  scrollbar-track-color: $gray-dark;
+  scrollbar-face-color: $gray;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: $gray-dark;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: $gray-dark;
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 8px;
+    background-color: $gray;
+    border-radius: 8px;
+  }
+}
+
+@mixin columns($count: 5, $width: 214px, $gap: 30) {
+  -webkit-column-count: $count;
+  -moz-column-count: $count;
+  column-count: $count;
+  -webkit-column-width: $width;
+  -moz-column-width: $width;
+  column-width: $width;
+  -webkit-column-gap: $gap;
+  -moz-column-gap: $gap;
+  column-gap: $gap;
+}
+
+@mixin no-columns {
+  -webkit-columns: initial;
+  -moz-columns: initial;
+  columns: initial;
+}
+
+@mixin input-field-border {
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid $dk-blue;
+  box-shadow: 0 1px 0px rgba($dk-blue, 0.4);
+}
+
+@mixin override-link-hover($color) {
+  &:hover,
+  &:active,
+  &:focus {
+    color: $color;
+  }
+}

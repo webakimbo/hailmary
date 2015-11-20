@@ -1,6 +1,7 @@
 h2 = @competition.group.name
 p = "Pot total: #{number_to_currency(@pot_total)}"
-p = @competition.season.current_week
+- unless @competition.season.current_week.nil?
+  p = @competition.season.current_week
 
 hr
 
@@ -16,5 +17,9 @@ section
       - @competition.standings.each do |user|
         tr(class="#{ 'current-user' if user[:id].eql?(@user.id) }")
           td = user[:display_name]
-          td = user[:point_total]
+          td
+            = user[:point_total]
+            - if user[:id].eql?(@user.id) and not @competition.season.pick_window_closed?
+              br
+              = link_to "Pick", "#{competition_path(@competition.id)}/pick"
           td = user[:record]

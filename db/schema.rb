@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20151117221350) do
   create_table "competitions", force: :cascade do |t|
     t.integer "group_id"
     t.integer "season_id"
-    t.decimal "buyin",     precision: 2
+    t.decimal "buyin",     precision: 2, default: 0
   end
 
   create_table "groups", force: :cascade do |t|
@@ -71,19 +71,29 @@ ActiveRecord::Schema.define(version: 20151117221350) do
     t.integer "user_id",  null: false
   end
 
+  create_table "matchups", force: :cascade do |t|
+    t.string   "event_id"
+    t.integer  "week_id"
+    t.string   "home_team"
+    t.string   "away_team"
+    t.datetime "match_time"
+    t.integer  "home_score"
+    t.integer  "away_score"
+    t.boolean  "home_won"
+    t.boolean  "is_final"
+  end
+
   create_table "picks", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "week_id"
     t.integer  "competition_id"
-    t.integer  "team_id"
-    t.integer  "opponent_id"
-    t.integer  "favorite_id"
-    t.string   "odds"
-    t.integer  "point_value"
+    t.integer  "matchup_id"
+    t.boolean  "picked_home_team"
+    t.integer  "point_value_win"
+    t.integer  "point_value_lose"
     t.boolean  "pick_correct"
     t.integer  "points_awarded"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "seasons", force: :cascade do |t|
