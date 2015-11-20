@@ -1,7 +1,7 @@
 h2 = @competition.group.name
 p = "Pot total: #{number_to_currency(@pot_total)}"
 - unless @competition.season.current_week.nil?
-  p = @competition.season.current_week
+  p = @competition.season.current_week.name
 
 hr
 

@@ -9,6 +9,8 @@ class CompetitionsController < ApplicationController
     @teams = Team.all
 
     # We'll want to disable the interactivity of this page if the pick deadline has passed
+    
+    @pick = Pick.where(:picks => {user_id:@user.id, competition_id:@competition.id}, :matchups => {:week_id => @competition.season.current_week.id}).joins(:matchup => :week).first
   end
 
   private

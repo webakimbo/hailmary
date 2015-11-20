@@ -2,7 +2,7 @@ h2 = link_to @competition.group.name, competition_path(@competition)
 p = "Pot total: #{number_to_currency(@pot_total)}"
 - unless @competition.season.current_week.nil?
   p
-    = @competition.season.current_week
+    = @competition.season.current_week.name
     - unless @competition.season.pick_window_closed?
       br
       = "Pick deadline: #{@competition.season.next_deadline}"
@@ -15,6 +15,8 @@ section
     | Point values in green represent points earned if your pick wins; values in red, points lost if your pick loses. Higher win values correspond to 
     = link_to "lower win probability", @data.source[:url], { target: "_blank", title: @data.source[:name] }
     | .
+
+  p = @pick.inspect
 
   br
   table

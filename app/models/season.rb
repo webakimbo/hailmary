@@ -12,7 +12,7 @@ class Season < ActiveRecord::Base
   def current_week
     past_future = weeks.partition{ |w| w.ends.past? }
     return nil if past_future[1].empty?
-    past_future[1].first.name
+    past_future[1].first
   end
 
   def pick_window_closed?
