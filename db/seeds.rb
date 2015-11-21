@@ -55,22 +55,22 @@ teams.each{ |team|
 User.create!(
   first_name: "Andy", last_name: "dePasquale", handle: "webakimbo", display_name_as: "full_name", 
   location: "San Francisco, CA", avatar: File.new("#{Rails.root}/public/TEMP/hs_icon.jpg"), 
-  email: "andy@coderefactory.com", password: "password", show_location: true, show_email: true, active: true
+  email: "andy@coderefactory.com", password: "password", password_confirmation: "password", show_location: true, show_email: true, active: true
 )
 User.create!(
   first_name: "Trey", last_name: "Anastasio", handle: "crimson_dago", display_name_as: "handle", 
   location: "Burlington, VT", avatar: File.new("#{Rails.root}/public/TEMP/trey.jpg"), 
-  email: "nfl1@webakimbo.com", password: "password", show_location: true, show_email: true, active: true
+  email: "nfl1@webakimbo.com", password: "password", password_confirmation: "password", show_location: true, show_email: true, active: true
 )
 User.create!(
   first_name: "Jimi", last_name: "Hendrix", handle: "experienced", display_name_as: "full_name", 
   location: "Michigan", avatar: File.new("#{Rails.root}/public/TEMP/jimi.jpg"), 
-  email: "nfl2@webakimbo.com", password: "password", show_location: true, show_email: true, active: true
+  email: "nfl2@webakimbo.com", password: "password", password_confirmation: "password", show_location: true, show_email: true, active: true
 )
 User.create!(
   first_name: "Bill", last_name: "Burr", handle: "ginger_comedian", display_name_as: "handle", 
   location: "Boston, MA", avatar: File.new("#{Rails.root}/public/TEMP/bill_burr.jpg"), 
-  email: "nfl3@webakimbo.com", password: "password", show_location: true, show_email: true, active: true
+  email: "nfl3@webakimbo.com", password: "password", password_confirmation: "password", show_location: true, show_email: true, active: true
 )
 
 Group.create!(
@@ -139,7 +139,7 @@ end
 User.create!(
   first_name: "Eli", last_name: "Manning", handle: "lesser_manning", display_name_as: "full_name", 
   location: "Vicksburg, MS", avatar: File.new("#{Rails.root}/public/TEMP/eli_manning.jpg"), 
-  email: "nfl4@webakimbo.com", password: "password", show_location: true, show_email: true, active: true
+  email: "nfl4@webakimbo.com", password: "password", password_confirmation: "password", show_location: true, show_email: true, active: true
 )
 
 # # Picks
