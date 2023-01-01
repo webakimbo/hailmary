@@ -1,5 +1,5 @@
-require 'simulation'
-require 'table_print'
+require "#{Rails.root}/app/modules/simulation"
+require "table_print"
 
 # `rails simulate:season`             --> generate odds and play all matchups
 # `rails simulate:season picks=true`  --> additionally run simulated user picks
