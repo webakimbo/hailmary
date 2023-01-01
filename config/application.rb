@@ -17,6 +17,7 @@ module Hailmary
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
+    config.autoload_paths << "#{root}/lib"
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end

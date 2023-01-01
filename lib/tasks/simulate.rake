@@ -3,6 +3,10 @@ require 'table_print'
 
 # `rails simulate:season`             --> generate odds and play all matchups
 # `rails simulate:season picks=true`  --> additionally run simulated user picks
+# 
+# Database must already be seeded for this to work.
+# Simulations are run in virtual memory and output to console; nothing stored in the db.
+
 namespace :simulate do
   desc 'Simulate odds and results for an entire season'
   task season: :environment do
