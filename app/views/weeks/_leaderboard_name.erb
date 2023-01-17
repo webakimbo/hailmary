@@ -1,0 +1,3 @@
+<tr id="user_season_name_<%= user_season.id %>">
+  <td class="<%= 'picked' if user_season.pick(week.id).present? %>"><%= user_season.user.full_name %></td>
+</tr>

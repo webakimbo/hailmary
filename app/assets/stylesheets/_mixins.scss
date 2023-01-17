@@ -1,0 +1,164 @@
+// ======================
+//  fonts
+// ======================
+
+@mixin f_body {
+  font: {
+    family: $font-family-sans-serif;
+    weight: 400;
+    style: normal;
+  }
+}
+
+// @mixin f_body_medium {
+//   font: {
+//     family: $font-family-sans-serif-medium;
+//     weight: 500;
+//     style: normal;
+//   }
+// }
+
+// @mixin f_body_bold {
+//   font: {
+//     family: $font-family-sans-serif-bold;
+//     weight: 700;
+//     style: normal;
+//   }
+// }
+
+// @mixin f_mono {
+//   font: {
+//     family: $font-family-monospace;
+//     weight: 600;
+//     style: normal;
+//   }
+//   text-transform: uppercase;
+// }
+
+// @mixin f_mono_medium {
+//   font: {
+//     family: $font-family-monospace-medium;
+//     weight: 500;
+//     style: normal;
+//   }
+//   text-transform: uppercase;
+// }
+
+// @mixin f_mono_regular {
+//   font: {
+//     family: $font-family-monospace-regular;
+//     weight: 400;
+//     style: normal;
+//   }
+//   text-transform: uppercase;
+// }
+
+// @mixin f_mono_bold {
+//   font: {
+//     family: $font-family-monospace-bold;
+//     weight: 700;
+//     style: normal;
+//   }
+//   text-transform: uppercase;
+// }
+
+// @mixin f_article_body {
+//   font: {
+//     family: $font-family-article;
+//     weight: 400;
+//     style: normal;
+//   }
+// }
+
+// @mixin f_article_body_bold {
+//   font: {
+//     family: $font-family-article-bold;
+//     weight: 700;
+//     style: normal;
+//   }
+// }
+
+
+// ======================
+//  breakpoints
+// ======================
+
+@mixin phone {
+  @media screen and (max-width: 420px) {
+    @content;
+  }
+}
+
+
+// ======================
+//  other
+// ======================
+
+@mixin truncated {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// @mixin avatar {
+//   width: 24px;
+//   height: 24px;
+//   background-color: $color-ui-3;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: 11px 14px;
+//   border-radius: 50%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+@mixin image-object-fit($fit: cover) {
+  object-fit: $fit;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin allow-motion {
+  @media screen and (prefers-reduced-motion: no-preference) {
+    @content;
+  }
+}
+
+@mixin placeholder-color($color) {
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+  &::-moz-placeholder {
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+  &:-moz-placeholder {
+    color: $color;
+  }
+  &::placeholder {
+    color: $color;
+  }
+}
+
+// @mixin add-edit-form {
+//   justify-content: flex-start;
+//   padding-top: 1.5rem;
+//   position: relative;
+
+//   &:before {
+//     content: "";
+//     width: calc(100% - 1.5rem);
+//     border-top: 1px solid $color-ui-2;
+//     position: absolute;
+//     top: 0;
+//     left: 0.75rem;
+//   }
+
+//   .button {
+//     margin-bottom: 0;
+//   }
+// }
+

@@ -1,7 +1,7 @@
 require "#{Rails.root}/app/modules/simulation"
 require "table_print"
 
-# `rails simulate:season`             --> generate odds and play all matchups
+# `rails simulate:season`             --> generate odds and instantly play all matchups w/o real user input
 # `rails simulate:season picks=true`  --> additionally run simulated user picks
 # 
 # Database must already be seeded for this to work.
@@ -107,15 +107,13 @@ namespace :simulate do
         }
 
         # GENERATE ODDS BASED ON RECORDS
-        away_odds = odds(away_strength, home_strength)
-        home_odds = odds(home_strength, away_strength)
+        away_odds = generate_odds(away_strength, home_strength)
+        home_odds = generate_odds(home_strength, away_strength)
         away_team_this_week[:odds] = away_odds
         home_team_this_week[:odds] = home_odds
 
         # GENERATE A RESULT BASED ON THOSE ODDS
-        underdog_odds = [away_odds, home_odds].sort.first
-        underdog_won = rand < underdog_odds
-        away_won = ((underdog_odds == away_odds) && underdog_won) || ((underdog_odds == home_odds) && !underdog_won)
+        away_won = away_won?(away_odds, home_odds)
 
         away_team_this_week[:won] = away_won
         home_team_this_week[:won] = !away_won
@@ -174,7 +172,8 @@ namespace :simulate do
           # how'd they do?
           pick = this_week[pick_team_id]
           opponent = this_week[pick[:opponent_id]]
-          pts = points(pick, opponent)
+          pts_for_win, pts_for_loss = possible_outcomes(pick[:odds], opponent[:odds])
+          pts = pick[:won] ? pts_for_win : pts_for_loss
 
           # store data
           new_data = user_data.deep_dup
@@ -189,7 +188,6 @@ namespace :simulate do
         # print picks table
         tp user_seasons.values.sort_by{|user_season| 0 - user_season[:total] }.map{|user_season| printable_pick(user_season) }
         3.times do; puts; end
-
       end
     end
   end

@@ -1,0 +1,21 @@
+<%= turbo_frame_tag "my_week_matchups" do %>
+  <div class="matchups">
+    <% if @matchups.present? %>
+      <% @matchups.each do |matchup| %>
+        <div class="matchup">
+          <%= render partial: "weeks/pick_option", locals: { matchup_team: matchup.matchup_teams.away_team } %>
+          <div class="matchup-details">
+            <%= matchup.kickoff.localtime.to_fs(:kickoff_date) %>
+            <br/>
+            <%= matchup.kickoff.localtime.to_fs(:kickoff_time) %>
+            <br/>
+            <%= matchup.location %>
+          </div>
+          <%= render partial: "weeks/pick_option", locals: { matchup_team: matchup.matchup_teams.home_team } %>
+        </div>
+      <% end %>
+    <% else %>
+      <p style="text-align: center;"><br/><br/>Season is over!</p>
+    <% end %>
+  </div>
+<% end %>

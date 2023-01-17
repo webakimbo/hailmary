@@ -1,0 +1,19 @@
+<%= turbo_frame_tag "week_controls" do %>
+  <% unless @season.complete? %>
+    <h3>Week <%= @week.week %> matchups</h3>
+  <% end %>
+  <% if current_user.is_admin? && controller.sim_mode? %>
+    <div id="simulation-controls">
+      <% unless @season.complete? %>
+        <%= button_to "Advance",
+                      api_v1_sim_advance_path,
+                      method: :patch,
+                      class: "button is-primary" %>
+      <% end %>
+      <%= button_to "Reset Simulation",
+                    api_v1_sim_reset_path,
+                    method: :patch,
+                    class: "button is-danger" %>
+    </div>
+  <% end %>
+<% end %>

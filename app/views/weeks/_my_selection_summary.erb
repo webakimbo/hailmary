@@ -1,0 +1,18 @@
+<%= turbo_frame_tag "my_selection_summary" do %>
+  <% unless @season.complete? %>
+    <div id="selection-summary">
+      <% if @pick %>
+        <p>
+          Your current pick is the <strong><%= @pick.matchup_team.team.full_name %>.
+          <br/>
+          Odds to win at time of selection: <%= @pick.odds * 100 %>%.
+          <br/>
+          <%- pts_for_win, pts_for_loss = @pick.display_outcomes %>
+          Wager: <span class="points-if-win"><%= pts_for_win %></span> / <span class="points-if-lose"><%= pts_for_loss %></span>
+        </p>
+      <% else %>
+        <p>Make your selection in the next [countdown].</p>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

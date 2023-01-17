@@ -1,1 +1,5 @@
+export USER_FIRST_NAME=
+export USER_LAST_NAME=
+export USER_EMAIL=
+export USER_PHONE=
 export SIMULATION_MODE=

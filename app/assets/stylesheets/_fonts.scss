@@ -1,0 +1,98 @@
+// /*
+//  *
+//  * INSTRUCTIONS
+//  *
+//  * Copy the Legal Disclaimer and the @font-faces statements to your regular CSS file.
+//  * The font file(s) should be placed relative to the regular CSS file.
+//  *
+//  */
+
+// /*
+//  * Legal Disclaimer for App licence
+//  *
+//  * Licence to use fonts in native, web, or hybrid apps on mobile or stationary devices, for example personal computers, smart phones, entertainment systems, game consoles, medical instruments, etc.
+//  *
+//  * Should the license download limit be exceeded the license holder will be required to contact Lineto.com for an upgrade.
+//  * 
+//  * It is strictly prohibited to rename the font and to download or use these fonts in any other media. 
+//  * 
+//  * These Web fonts are licensed exclusively for the use on the following App(s):
+//  *
+//  * Ampersand (Total Downloads: <10k)
+//  *
+//  */
+
+
+// // ======================
+// //  @font-face definitions
+// // ======================
+
+// // Unica 77
+// $unica-faces:
+//   'Black',
+//   'BlackItalic',
+//   'Bold',
+//   'BoldItalic',
+//   'ExtraBlack',
+//   'ExtraBlackItalic',
+//   'Italic',
+//   'Light',
+//   'LightItalic',
+//   'Medium',
+//   'MediumItalic',
+//   'Regular',
+//   'Thin',
+//   'ThinItalic';
+
+// @each $face in $unica-faces {
+//   @font-face {
+//     font-family: 'Unica77LLWeb-#{$face}';
+//     src: url('../../assets/fonts/Unica77LLWeb-#{$face}.woff2') format('woff2'), /* Super Modern Browsers */
+//          url('../../assets/fonts/Unica77LLWeb-#{$face}.woff') format('woff'); /* Pretty Modern Browsers */
+//   }
+// }
+
+// // Pitch Sans
+// $pitch-faces:
+//   'bold',
+//   'bold-italic',
+//   'light',
+//   'light-italic',
+//   'medium',
+//   'medium-italic',
+//   'regular',
+//   'regular-italic',
+//   'semibold',
+//   'semibold-italic';
+
+// @each $face in $pitch-faces {
+//   @font-face {
+//     font-family: 'pitch-sans-web-#{$face}';
+//     src: url('../../assets/fonts/pitch-sans-web-#{$face}.woff2') format('woff2'), /* Super Modern Browsers */
+//          url('../../assets/fonts/pitch-sans-web-#{$face}.woff') format('woff'); /* Pretty Modern Browsers */
+//   }
+// }
+
+// // Rosart
+// $rosart-faces:
+//   'Bold',
+//   'BoldItalic',
+//   'SemiBold',
+//   'SemiBoldItalic',
+//   'Medium',
+//   'MediumItalic',
+//   'Regular',
+//   'RegularItalic';
+
+// @each $face in $rosart-faces {
+//   @font-face {
+//     font-family: 'Rosart-#{$face}';
+//     src: url('../../assets/fonts/Rosart-#{$face}.woff') format('woff'); /* Pretty Modern Browsers */
+//   }
+// }
+
+// // // Segment7
+// // @font-face {
+// //   font-family: 'Segment7';
+// //   src: url('../../assets/fonts/Segment7-4Gml.woff') format('woff'); /* Pretty Modern Browsers */
+// // }

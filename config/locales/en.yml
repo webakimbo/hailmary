@@ -30,4 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  errors:
+    format: "%{attribute} %{message}"
+    user_not_authorized_error: "You are not authorized to perform this action."
+    messages:
+      already_picked: "You've already selected this team this season. Please pick again."

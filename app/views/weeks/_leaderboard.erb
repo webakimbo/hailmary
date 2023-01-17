@@ -1,0 +1,52 @@
+<%= turbo_frame_tag "leaderboard" do %>
+  <%- completed_weeks = @season.complete? ? @season.weeks.size : (@week.week - 1) %>
+  <h3>Leaderboard</h3>
+  <div id="leaderboard-tables">
+    <table class="table leaderboard-names">
+      <thead>
+        <tr>
+          <td>Name</td>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user_seasons.each do |user_season| %>
+          <%= render partial: "weeks/leaderboard_name", locals: { user_season: user_season, week: @week } %>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="table-container">
+      <table class="table leaderboard-points">
+        <thead>
+          <tr>
+            <% Array.new(completed_weeks).each_with_index do |n, i| %>
+              <td>wk <%= i + 1 %></td>
+            <% end %>
+            <td>Points</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user_seasons.each do |user_season| %>
+            <tr>
+              <% Array.new(completed_weeks).each_with_index do |n, i| %>
+                <%
+                  pts = user_season.picks.find{|pick| pick.week_id == i + 1}&.points || Constants::NO_PICK_PENALTY
+                  if pts > 0
+                    pts_class = "win"
+                    pts_display = "+#{pts.to_s}"
+                  else
+                    pts_class = "lose"
+                    pts_display = pts.to_s
+                  end
+                %>
+                <td>
+                  <span class="points-if-<%= pts_class %>"><%= pts_display || "-" %></span>
+                </td>
+              <% end %>
+              <td><%= user_season.points %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>

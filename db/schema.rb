@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_27_195934) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_04_233101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "app_admin_roles", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_app_admin_roles_on_user_id"
+  end
 
   create_table "matchup_teams", force: :cascade do |t|
     t.bigint "matchup_id"
@@ -46,6 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_195934) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_picks_on_team_id"
+    t.index ["user_season_id", "week_id"], name: "index_picks_on_user_season_id_and_week_id", unique: true
     t.index ["user_season_id"], name: "index_picks_on_user_season_id"
     t.index ["week_id"], name: "index_picks_on_week_id"
   end
@@ -58,10 +66,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_195934) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sim_app_admin_roles", force: :cascade do |t|
+    t.bigint "sim_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sim_user_id"], name: "index_sim_app_admin_roles_on_sim_user_id"
+  end
+
   create_table "sim_matchup_teams", force: :cascade do |t|
     t.bigint "sim_matchup_id"
     t.bigint "team_id"
-    t.decimal "strength", precision: 6, scale: 5, default: "0.5"
+    t.decimal "odds", precision: 6, scale: 5, default: "0.5"
     t.boolean "home", default: false
     t.integer "score", default: 0
     t.boolean "won", default: false
@@ -90,27 +105,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_195934) do
     t.integer "points", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["sim_user_season_id", "week_id"], name: "index_sim_picks_on_sim_user_season_id_and_week_id", unique: true
     t.index ["sim_user_season_id"], name: "index_sim_picks_on_sim_user_season_id"
     t.index ["team_id"], name: "index_sim_picks_on_team_id"
     t.index ["week_id"], name: "index_sim_picks_on_week_id"
   end
 
   create_table "sim_user_seasons", force: :cascade do |t|
-    t.bigint "sim_user_id"
+    t.string "competitor_type"
+    t.bigint "competitor_id"
     t.bigint "season_id"
     t.integer "points", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["competitor_type", "competitor_id"], name: "index_sim_user_seasons_on_competitor"
     t.index ["season_id"], name: "index_sim_user_seasons_on_season_id"
-    t.index ["sim_user_id"], name: "index_sim_user_seasons_on_sim_user_id"
   end
 
   create_table "sim_users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "email"
-    t.string "text"
-    t.string "contact_preference", default: "text"
+    t.string "email", default: "", null: false
+    t.string "phone"
+    t.string "contact_preference", default: "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -138,11 +155,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_195934) do
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "email"
-    t.string "text"
-    t.string "contact_preference", default: "text"
+    t.string "email", default: "", null: false
+    t.string "phone"
+    t.string "contact_preference", default: "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "weeks", force: :cascade do |t|

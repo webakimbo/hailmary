@@ -1,0 +1,20 @@
+<%
+  ha_class = matchup_team.home ? "home" : "away"
+  pts_for_win, pts_for_loss = matchup_team.display_outcomes
+  btn_class = "button matchup-team matchup-team-#{ha_class} #{'selected' if @pick&.matchup_team&.id == matchup_team.id}"
+%>
+
+<%= turbo_frame_tag "pick_option_#{matchup_team.id}" do %>
+  <%= button_to api_v1_make_pick_path(@week, matchup_team_id: matchup_team.id),
+                method: :post,
+                disabled: @already_picked_ids.include?(matchup_team.team.id),
+                class: btn_class do %>
+    <%= team_logo(matchup_team.team) %>
+    <p class="team-record"><%= matchup_team.team.current_season_record %></p>
+    <p class="team-pick-data">
+      Odds to win: <%= matchup_team.odds * 100 %>%
+      <br/>
+      Wager: <span class="points-if-win"><%= pts_for_win %></span> / <span class="points-if-lose"><%= pts_for_loss %></span>
+    </p>
+  <% end %>
+<% end %>

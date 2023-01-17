@@ -1,0 +1,25 @@
+<turbo-stream action="replace" target="week_controls">
+  <template>
+    <%= render partial: "weeks/week_controls" %>
+  </template>
+</turbo-stream>
+
+<turbo-stream action="replace" target="my_selection_summary">
+  <template>
+    <%= render partial: "weeks/my_selection_summary" %>
+  </template>
+</turbo-stream>
+
+<% if @previous_pick.present? %>
+  <turbo-stream action="replace" target="pick_option_<%= @previous_pick.matchup_team.id %>">
+    <template>
+      <%= render partial: "weeks/pick_option", locals: { matchup_team: @previous_pick.matchup_team } %>
+    </template>
+  </turbo-stream>
+<% end %>
+
+<turbo-stream action="replace" target="pick_option_<%= @pick.matchup_team.id %>">
+  <template>
+    <%= render partial: "weeks/pick_option", locals: { matchup_team: @pick.matchup_team } %>
+  </template>
+</turbo-stream>

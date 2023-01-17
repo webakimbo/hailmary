@@ -4,11 +4,20 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.2.4",
+    "bulma": "^0.9.4",
+    "dayjs": "^1.11.7",
+    "debounce-fn": "^5.1.2",
+    "element-closest-polyfill": "^1.0.5",
     "esbuild": "^0.16.12",
-    "sass": "^1.57.1"
+    "sass": "^1.57.1",
+    "url-search-params-polyfill": "^8.1.1",
+    "whatwg-fetch": "^3.6.2"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
-    "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
+    "build:css": "sass ./app/assets/stylesheets/application.scss:./app/assets/builds/application.css ./app/assets/stylesheets/devise.scss:./app/assets/builds/devise.css --no-source-map --load-path=node_modules"
+  },
+  "devDependencies": {
+    "eslint": "^8.31.0"
   }
 }

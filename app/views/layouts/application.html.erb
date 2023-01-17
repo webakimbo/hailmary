@@ -3,6 +3,7 @@
   <head>
     <title>Hailmary</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="turbo-cache-control" content="no-cache">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,7 +11,24 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body id="<%= controller.controller_name %>" class="<%= controller.action_name %>">
+    <!-- + header -->
+    <%= render partial: "partials/header" %>
+    <!-- / header -->
+
+    <!-- + main -->
+    <main>
+      <!-- <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p> -->
+
+      <%= yield %>
+    </main>
+    <!-- / main -->
+
+    <!-- + footer -->
+    <footer>
+      
+    </footer>
+    <!-- / footer -->
   </body>
 </html>

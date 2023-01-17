@@ -53,6 +53,7 @@ gem "bootsnap", require: false
 
 # Other
 gem "inline_svg"
+gem "devise"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -60,6 +61,7 @@ group :development, :test do
   gem 'foreman'
   gem 'faker'
   gem 'table_print'
+  gem 'letter_opener_web'
 end
 
 group :development do

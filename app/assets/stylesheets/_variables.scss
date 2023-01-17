@@ -1,0 +1,57 @@
+/*
+ * Style definitions
+ */
+
+// ======================
+//  colors
+// ======================
+
+$color-ui-white: #ffffff;
+$color-ui-black: #1b1917;
+$color-ui-beer: #ff981c;
+$color-ui-0: #fafbfb;
+$color-ui-1: #f0f3f4;
+$color-ui-2: #e7ecee;
+$color-ui-3: #dde1e3;
+$color-ui-4: #c7cacc;
+$color-ui-5: #8b8d8f;
+$color-ui-6: #737478;
+$color-ui-7: #636366;
+$color-ui-8: #535355;
+
+$color-true-black: #000000;
+
+$color-brand-green: #00a071;
+$color-brand-dark-green: #007354;
+$color-brand-blue: #1f8ac4;
+$color-brand-dark-blue: #006d96;
+$color-brand-pink: #e8599e;
+$color-brand-dark-purple: #8b4c9e;
+$color-brand-red: #eb2926;
+$color-brand-dark-red: #ba080d;
+$color-brand-orange: #f5571c;
+$color-brand-dark-orange: #c74200;
+$color-brand-yellow: #fab23a;
+$color-brand-dark-yellow: #b06300;
+$color-brand-grey: #a8a39e;
+$color-brand-dark-grey: #928c86;
+$color-brand-white: #f5f3f2;
+$color-brand-black: $color-ui-black;
+
+
+// ======================
+//  fonts
+// ======================
+
+$sans-serif-fallbacks: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+$monospace-fallbacks: monospace;
+
+$font-family-sans-serif: "Unica77LLWeb-Regular", #{$sans-serif-fallbacks};
+$font-family-sans-serif-medium: "Unica77LLWeb-Medium", #{$sans-serif-fallbacks};
+$font-family-sans-serif-bold: "Unica77LLWeb-Bold", #{$sans-serif-fallbacks};
+$font-family-monospace: "pitch-sans-web-semibold", #{$monospace-fallbacks};
+$font-family-monospace-medium: "pitch-sans-web-medium", #{$monospace-fallbacks};
+$font-family-monospace-regular: "pitch-sans-web-regular", #{$monospace-fallbacks};
+$font-family-monospace-bold: "pitch-sans-web-bold", #{$monospace-fallbacks};
+$font-family-article: "Rosart-Regular", #{$font-family-sans-serif};
+$font-family-article-bold: "Rosart-Bold", #{$font-family-sans-serif-bold};

@@ -1,0 +1,33 @@
+// ======================
+//  imports
+// ======================
+
+@import "_base";
+
+
+// ======================
+//  Devise styles
+// ======================
+
+body {
+  background: url(bg_packerville.jpg) center center no-repeat;
+  background-size: cover;
+}
+
+main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.devise-container {
+  width: clamp(20.5rem, 36rem, 90vw);
+  padding: 2rem;
+  background-color: #fff;
+}
+
+.has-actions {
+  margin-bottom: 1rem;
+}

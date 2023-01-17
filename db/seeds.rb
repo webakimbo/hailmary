@@ -116,19 +116,19 @@ end
 
 
 # SIMULATED USERS & USER SEASONS
-SimUser.destroy_all
-SimUserSeason.destroy_all
+SimUserSeason.delete_all
+SimUser.delete_all
 sim_users = Array.new(10).map do |i|
   {
     first_name: Faker::Name.unique.first_name,
     last_name: Faker::Name.unique.last_name,
     email: Faker::Internet.safe_email,
-    text: Faker::Number.number(digits: 10),
+    phone: Faker::Number.number(digits: 10),
   }
 end
 sim_users.each do |sim_user|
   su = SimUser.create!(sim_user)
-  SimUserSeason.create!(sim_user: su, season: first_season)
+  SimUserSeason.create!(competitor: su, season: first_season)
 end
 Faker::Name.unique.clear
 

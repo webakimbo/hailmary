@@ -1,45 +1,14 @@
-<p>
-  We're in week <%= @week.week %>
-</p>
+<div class="container">
 
-<h3>Leaderboard</h3>
-<table>
-  <thead>
-    <tr>
-      <td>Name</td>
-      <td>Points</td>
-    </tr>
-  </thead>
-  <tbody>
-    <% @user_seasons.each do |user_season| %>
-      <tr>
-        <td><%= user_season.user.full_name %></td>
-        <td><%= user_season.points %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <section>
+    <%= turbo_stream_from "ws:leaderboard" %>
+    <%= render partial: "leaderboard" %>
+  </section>
 
-<h3>Matchups</h3>
-<section>
-  <% @matchups.each do |matchup| %>
-    <div class="matchup">
-      <div class="matchup-team-away">
-        <%= matchup.matchup_teams.away_team.team.abbr %>
-      </div>
-      <div class="matchup-details">
-        <p>@</p>
-        <p><%= matchup.kickoff %></p>
-        <p><%= matchup.location %></p>
-      </div>
-      <div class="matchup-team-home">
-        <%= matchup.matchup_teams.home_team.team.abbr %>
-      </div>
-        <br/>
-        
-        <br/>
-        
-      </td>
-    </div>
-  <% end %>
-</section>
+  <section>
+    <%= render partial: "week_controls" %>
+    <%= render partial: "my_selection_summary" %>
+    <%= render partial: "my_week_matchups" %>
+  </section>
+
+</div>

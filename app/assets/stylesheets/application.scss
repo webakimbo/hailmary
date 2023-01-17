@@ -1,0 +1,178 @@
+// ======================
+//  imports
+// ======================
+
+@import "_base";
+// @import "actiontext";
+// @import "popup";
+// @import "carousel";
+// @import "notion";
+// @import "google_doc";
+// @import "_typeahead";
+
+
+// ======================
+//  App styles
+// ======================
+
+turbo-frame {
+  display: contents;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+#leaderboard-tables {
+  display: flex;
+  max-width: 100%;
+
+  td {
+    white-space: nowrap;
+  }
+
+  .leaderboard-names {
+    flex: none;
+
+    td {
+      font-weight: bold;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    tbody td.picked:before {
+      content: '✔';
+      color: green;
+      position: absolute;
+      left: 0.4rem;
+    }
+  }
+
+  .table-container {
+    flex: 1;
+  }
+
+  .leaderboard-points {
+    td {
+      text-align: center;
+
+      &:last-child {
+        font-weight: bold;
+      }
+    }
+
+    tbody td:last-child {
+      background-color: rgba($color-brand-blue, 0.1);
+    }
+  }
+}
+
+#simulation-controls {
+  form {
+    display: inline-block;
+  }
+}
+
+#selection-summary {
+  margin: 2rem 0;
+  padding: 1rem 2rem;
+  border: 2px solid green;
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.points-if-win {
+  color: green;
+}
+
+.points-if-lose {
+  color: red;
+}
+
+.matchups {
+  // width: clamp(20.5rem, 90vw, 70rem);
+  width: clamp(20.5rem, 90vw, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
+  .matchup {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+
+    .matchup-team {
+      flex: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 16rem;
+      height: auto;
+
+      & > * {
+        flex: 1;
+      }
+
+      .team-logo {
+        aspect-ratio: 1;
+        flex: none;
+        width: calc(8rem - 2em);
+        height: calc(8rem - 2em);
+
+        img {
+          @include image-object-fit(contain);
+        }
+      }
+
+      .team-record {
+        font-weight: bold;
+      }
+
+      .team-pick-data {
+        font-size: 0.875rem;
+      }
+
+      &.selected {
+        border-color: green;
+
+        &[disabled] {
+          opacity: 1;
+          cursor: pointer;
+          background-color: rgba(0,255,0,0.2);
+        }
+      }
+    }
+
+    .matchup-details {
+      flex: 1;
+      text-align: center;
+      max-width: 20rem;
+      padding: 1rem 2rem;
+      // border: 1px solid gray;
+      background-color: rgba(0,0,0,0.1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      &:before {
+        content: '@';
+        text-align: center;
+        font-size: 3rem;
+        font-weight: bold;
+        font-style: italic;
+        line-height: 1;
+        opacity: 0.3;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}

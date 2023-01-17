@@ -9,9 +9,9 @@ class InitialSetup < ActiveRecord::Migration[7.0]
     create_table :users do |t|
       t.string :first_name
       t.string :last_name
-      t.string :email
-      t.string :text
-      t.string :contact_preference, default: "text"
+      t.string :email, null: false, default: ""
+      t.string :phone
+      t.string :contact_preference, default: "phone"
     
       t.timestamps
     end
@@ -80,7 +80,7 @@ class InitialSetup < ActiveRecord::Migration[7.0]
     create_table :picks do |t|
       t.references :user_season
       t.references :week
-      t.references :team
+      t.references :matchup_team
       t.decimal :odds, precision: 6, scale: 5, default: 0.500
       t.boolean :correct, default: false
       t.integer :points, default: 0
@@ -97,16 +97,16 @@ class InitialSetup < ActiveRecord::Migration[7.0]
     create_table :sim_users do |t|
       t.string :first_name
       t.string :last_name
-      t.string :email
-      t.string :text
-      t.string :contact_preference, default: "text"
+      t.string :email, null: false, default: ""
+      t.string :phone
+      t.string :contact_preference, default: "phone"
     
       t.timestamps
     end
 
     # USER SEASONS
     create_table :sim_user_seasons do |t|
-      t.references :sim_user
+      t.references :competitor, polymorphic: true
       t.references :season
       t.integer :points, default: 0
     
@@ -127,7 +127,7 @@ class InitialSetup < ActiveRecord::Migration[7.0]
     create_table :sim_matchup_teams do |t|
       t.references :sim_matchup
       t.references :team
-      t.decimal :strength, precision: 6, scale: 5, default: 0.500
+      t.decimal :odds, precision: 6, scale: 5, default: 0.500
       t.boolean :home, default: false
       t.integer :score, default: 0
       t.boolean :won, default: false
@@ -139,11 +139,30 @@ class InitialSetup < ActiveRecord::Migration[7.0]
     create_table :sim_picks do |t|
       t.references :sim_user_season
       t.references :week
-      t.references :team
+      t.references :sim_matchup_team
       t.decimal :odds, precision: 6, scale: 5, default: 0.500
       t.boolean :correct, default: false
       t.integer :points, default: 0
 
+      t.timestamps
+    end
+
+
+    # #####################
+    #  Admin
+    # #####################
+
+    # APP ADMINS
+    create_table :app_admin_roles do |t|
+      t.references :user
+    
+      t.timestamps
+    end
+
+    # SIM APP ADMINS
+    create_table :sim_app_admin_roles do |t|
+      t.references :sim_user
+    
       t.timestamps
     end
 
